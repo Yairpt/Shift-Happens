@@ -1,2 +1,9 @@
 scikit-learn
 pandas
+numpy
+seaborn
+xgboost
+lightgbm
+catboost
+pyyaml
+matplotlib

@@ -1,0 +1,115 @@
+# Model configurations and hyperparameters
+models:
+  logistic_regression:
+    class: sklearn.linear_model.LogisticRegression
+    params:
+      C: [0.001, 0.01, 0.1, 1, 10]
+      penalty: ['l1', 'l2']
+      solver: ['liblinear', 'saga']
+      class_weight: ['balanced', null]
+    metrics:
+      - roc_auc
+      - precision
+      - recall
+      - f1
+    description: |
+      Baseline model with good interpretability.
+      Best for: Initial baseline, linear relationships
+      Evaluation focus: ROC-AUC and precision
+
+  random_forest:
+    class: sklearn.ensemble.RandomForestClassifier
+    params:
+      n_estimators: [100, 200, 300]
+      max_depth: [10, 20, 30, null]
+      min_samples_split: [2, 5, 10]
+      class_weight: ['balanced', 'balanced_subsample', null]
+    metrics:
+      - roc_auc
+      - precision
+      - recall
+      - f1
+    description: |
+      Ensemble method good for non-linear relationships.
+      Best for: Complex feature interactions
+      Evaluation focus: F1-score and feature importance
+
+  xgboost:
+    class: xgboost.XGBClassifier
+    params:
+      n_estimators: [100, 200, 300]
+      max_depth: [3, 4, 5]
+      learning_rate: [0.01, 0.1, 0.3]
+      subsample: [0.8, 0.9, 1.0]
+      colsample_bytree: [0.8, 0.9, 1.0]
+    metrics:
+      - roc_auc
+      - average_precision
+      - f1
+    description: |
+      High-performance gradient boosting.
+      Best for: Large-scale data, production deployment
+      Evaluation focus: ROC-AUC and learning curves
+
+  lightgbm:
+    class: lightgbm.LGBMClassifier
+    params:
+      n_estimators: [100, 200, 300]
+      num_leaves: [31, 63, 127]
+      learning_rate: [0.01, 0.1, 0.3]
+      subsample: [0.8, 0.9, 1.0]
+      colsample_bytree: [0.8, 0.9, 1.0]
+    metrics:
+      - roc_auc
+      - average_precision
+      - f1
+    description: |
+      Fast gradient boosting implementation.
+      Best for: Large datasets, faster training
+      Evaluation focus: Average precision and efficiency
+
+  catboost:
+    class: catboost.CatBoostClassifier
+    params:
+      iterations: [100, 200, 300]
+      learning_rate: [0.01, 0.1, 0.3]
+      depth: [4, 6, 8]
+      l2_leaf_reg: [1, 3, 5, 7]
+      border_count: [32, 64, 128]
+    categorical_features: [
+      'product',
+      'campaign_id',
+      'webpage_id',
+      'product_category_1',
+      'product_category_2',
+      'user_group_id',
+      'gender'
+    ]
+    metrics:
+      - roc_auc
+      - average_precision
+      - f1
+    description: |
+      Gradient boosting with superior categorical feature handling.
+      Best for: Datasets with many categorical features
+      Key advantages:
+        - Native categorical feature support
+        - Handles missing values automatically
+        - Resistant to overfitting
+      Evaluation focus: ROC-AUC and categorical feature importance
+
+preprocessing:
+  numerical:
+    scaler: StandardScaler
+    imputer: SimpleImputer
+    strategy: mean
+
+  categorical:
+    encoding: one_hot
+    max_categories: 20
+    handle_unknown: ignore
+
+cross_validation:
+  n_splits: 5
+  shuffle: true
+  random_state: 42

@@ -1,0 +1,15 @@
+ctr_prediction/
+│
+├── config/
+│   └── model_config.yaml       # Configuration for models and hyperparameters
+│
+├── src/
+│   ├── preprocessing.py        # Data preprocessing and feature engineering
+│   ├── model_trainer.py        # Model training and cross-validation
+│   ├── evaluator.py           # Model evaluation and visualization
+│   └── utils.py               # Utility functions
+│
+├── notebooks/
+│   └── model_analysis.ipynb    # Jupyter notebook for analysis
+│
+└── requirements.txt            # Project dependencies

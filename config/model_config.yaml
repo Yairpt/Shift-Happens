@@ -1,21 +1,21 @@
 # Model configurations and hyperparameters
 models:
-  logistic_regression:
-    class: sklearn.linear_model.LogisticRegression
-    params:
-      C: [0.001, 0.01, 0.1, 1, 10]
-      penalty: ['l1', 'l2']
-      solver: ['liblinear', 'saga']
-      class_weight: ['balanced', null]
-    metrics:
-      - roc_auc
-      - precision
-      - recall
-      - f1
-    description: |
-      Baseline model with good interpretability.
-      Best for: Initial baseline, linear relationships
-      Evaluation focus: ROC-AUC and precision
+  #logistic_regression:
+  #  class: sklearn.linear_model.LogisticRegression
+  #  params:
+  #    C: [0.001, 0.01, 0.1, 1, 10]
+  #    penalty: ['l1', 'l2']
+  #    solver: ['liblinear', 'saga']
+  #   class_weight: ['balanced', null]
+  #  metrics:
+  #    - roc_auc
+  #    - precision
+  #    - recall
+  #    - f1
+  #  description: |
+  #    Baseline model with good interpretability.
+  #    Best for: Initial baseline, linear relationships
+  #    Evaluation focus: ROC-AUC and precision
 
   random_forest:
     class: sklearn.ensemble.RandomForestClassifier
@@ -110,6 +110,6 @@ preprocessing:
     handle_unknown: ignore
 
 cross_validation:
-  n_splits: 5
+  n_splits: 2
   shuffle: true
   random_state: 42

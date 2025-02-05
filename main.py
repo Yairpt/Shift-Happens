@@ -1,6 +1,7 @@
 """
 Main pipeline script for CTR prediction project.
 """
+import os
 
 import pandas as pd
 import numpy as np
@@ -183,4 +184,5 @@ class CTRPipeline:
 if __name__ == "__main__":
     # Run pipeline
     pipeline = CTRPipeline()
-    summary = pipeline.run_pipeline('data/train_dataset_full.csv', "is_click")
+    # summary = pipeline.run_pipeline('data/train_dataset_full.csv', "is_click")
+    summary = pipeline.run_pipeline('data/train_dataset_partial.csv', "is_click")

@@ -11,6 +11,7 @@ from typing import Dict, List, Optional, Tuple
 import logging
 import matplotlib.pyplot as plt
 import seaborn as sns
+import gc
 
 class CTRModelTrainer:
     """
@@ -110,8 +111,10 @@ class CTRModelTrainer:
         Returns:
             Dictionary containing evaluation results
         """
-        self.logger.info(f"Training model: {model_name}")
+        gc.collect()
 
+        self.logger.info(f"Training model: {model_name}")
+        # Get model and parameters
         model_info = self.models[model_name]
         params = custom_params or model_info['params']
 
